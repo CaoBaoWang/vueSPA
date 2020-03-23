@@ -6,6 +6,12 @@ import login from './components/login'
 import home from './components/home'
 import notFoundPage from './components/notFoundPage'
 
+import HelloWorld from './components/HelloWorld'
+import HomeMain from "./components/homeMain";
+
+
+Vue.component('HelloWorld', HelloWorld);
+
 Vue.config.productionTip = false
 
 
@@ -25,14 +31,28 @@ var router = new VueRouter({
             component: login
         },
         {
-            path: '/home',
-            name: 'home',
-            component: home
+            path: '',
+            component: home,
+            children: [
+
+                {
+                    name: 'home',
+                    path: 'home',
+                    component: HomeMain
+
+                },
+                {
+                    name: 'helloWorld',
+                    path: 'helloWorld',
+                    component: HelloWorld
+                },
+
+            ]
         },
         {
-            path : '*',
-            name : '404',
-            component : notFoundPage
+            path: '*',
+            name: '404',
+            component: notFoundPage
         }
     ]
 })
