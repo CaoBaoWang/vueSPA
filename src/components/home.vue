@@ -30,6 +30,8 @@
             console.log(this.$route.query.uid);
         }
     }
+
+    
 </script>
 
 <style scoped>

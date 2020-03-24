@@ -8,8 +8,10 @@ import notFoundPage from './components/notFoundPage'
 
 import HelloWorld from './components/HelloWorld'
 import HomeMain from "./components/homeMain";
+import {API} from './network.js';
 
 
+console.log(JSON.stringify(API));
 Vue.component('HelloWorld', HelloWorld);
 
 Vue.config.productionTip = false
