@@ -1,7 +1,5 @@
 import Axios from 'axios'
 
-Axios.defaults.baseURL = baseUrl();
-
 
 function baseUrl() {
 
@@ -13,9 +11,6 @@ function baseUrl() {
      * 1. 测试环境
      * 3.正式环境
      */
-
-
-
 
         // var urlTag = 1 ;
         //
@@ -36,6 +31,29 @@ function baseUrl() {
 
 }
 
+//Axios 全局配置
+Axios.defaults = {
+    baseURL: baseUrl(),
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Accept': 'application/json',
+    },
+    timeout: 1000 * 60,
+    withCredentials: false,
+    responseType: 'json'
+}
+//全局请求拦截
+Axios.interceptors.request.use(
+    (request) => {
+        console.log(request);
+
+    },
+    error => {
+        console.log(error);
+    }
+);
+
+
 const API = {
     login: 'api/account/login'
 };
@@ -48,14 +66,15 @@ export {API} ;
 Axios.get(API.login, {
     params: {
         loginName: 'admin',
-        password: 'a123456'
+        password: 'a12345 ',
+        pushClient: 'ANDROID'
     }
 })
     .then(function (response) {
-        console.log(response)
+        console.log('get then=' + JSON.stringify(response))
     })
     .catch(function (error) {
-        console.log(error)
+        console.log('get catch=' + error)
     });
 
 
@@ -64,8 +83,8 @@ Axios.post(API.login, {
     password: 'a123456'
 })
     .then(function (response) {
-        console.log(response)
+        console.log('post then=' + response)
     })
     .catch(function (error) {
-        console.log(error)
+        console.log('post catch=' + error)
     });
