@@ -8,13 +8,14 @@ import notFoundPage from './components/notFoundPage'
 
 import HelloWorld from './components/HelloWorld'
 import HomeMain from "./components/homeMain";
-import {API} from './network.js';
 
+import {api} from  './modules/index';
 
-console.log(JSON.stringify(API));
+Vue.prototype.$api = api ;
 Vue.component('HelloWorld', HelloWorld);
-
 Vue.config.productionTip = false
+
+
 
 
 var router = new VueRouter({
