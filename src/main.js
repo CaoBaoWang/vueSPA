@@ -16,6 +16,8 @@ Vue.component('HelloWorld', HelloWorld);
 Vue.config.productionTip = false
 
 
+var a=0;
+
 
 
 var router = new VueRouter({
