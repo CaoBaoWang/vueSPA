@@ -4,51 +4,65 @@
         <button @click="toHome">toHome</button>
         <button @click="show=!show">toggle</button>
 
+        <p>loginName = {{user.loginName}}</p>
+
+        <van-button disabled type="default">默认按钮</van-button>
+        <van-button :disabled="show"  type="primary">主要按钮</van-button>
+        <van-button type="info">信息按钮</van-button>
+        <van-button type="warning">警告按钮</van-button>
+        <van-button type="danger">危险按钮</van-button>
+
 
     </div>
 
 </template>
 
 <script>
+    import Vue from 'vue';
+    import { Button } from 'vant';
+
+    Vue.use(Button);
     export default {
         name: "login",
         data: function () {
             return {
-                show: true
+                show: false
             }
         },
         methods: {
             toHome() {
+                console.log(this.$store.getters['account/isLogin']);
 
-
-                this.$api.login({
+                var param = {
                     loginName: 'admin',
                     password: 'a123456',
                     pushClient: 'ANDROID'
-                })
+                };
+                this.$store.dispatch('account/login', param)
                     .then(response => {
-
-                        console.log('login succees =' + JSON.stringify(response));
+                        console.log('login.vue=-' + JSON.stringify(response))
                     })
-                    .catch(err=>{
-                        console.log(err);
+                    .catch(response=>{
+                        console.log(response);
                     })
 
 
-                this.$router.push({
-                    name: 'home',
-                    // query:{
-                    //     uid:'uid',
-                    //     name :'name wsl'
-                    //
-                    // },
-                    // params:{
-                    //     name :'homeMain'
-                    // }
 
-                })
+                //
+                // this.$router.push({
+                //     name: 'home',
+                //
+                // })
 
             },
+        },
+        computed: {
+            user() {
+                // return this.$store.state.account.user;
+                // return this.$store.getters['account/getUser']
+                return this.$store.state.account.user;
+            }
+
         }
     }
 </script>

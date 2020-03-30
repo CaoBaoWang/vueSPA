@@ -10,13 +10,16 @@ import HelloWorld from './components/HelloWorld'
 import HomeMain from "./components/homeMain";
 
 import {api} from  './modules/index';
+import store from './vuex/store'
 
+
+Vue.use(VueRouter);
 Vue.prototype.$api = api ;
 Vue.component('HelloWorld', HelloWorld);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 
-var a=0;
+
 
 
 
@@ -62,9 +65,9 @@ var router = new VueRouter({
     ]
 })
 
-Vue.use(VueRouter)
+
 new Vue({
     router: router,
-
+    store ,
     render: h => h(App),
 }).$mount('#app')

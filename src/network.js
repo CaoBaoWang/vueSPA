@@ -162,7 +162,24 @@ axios.interceptors.response.use(
     }
 )
 
-export default axios ;
+function postCreater(url, params) {
+    return axios.post(url, params)
+}
+
+function getCreater(url, params) {
+    return axios.get(url, {
+        params: params
+    });
+}
+
+export {
+    getCreater as get,
+    postCreater as post
+};
+
+export default axios;
+
+
 
 
 
