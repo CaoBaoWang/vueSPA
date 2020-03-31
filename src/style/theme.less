@@ -1,6 +1,80 @@
-//@goods-action-button-danger-color:'pink'
+// Color Palette
+@black: #000;
+@white: #fff;
+@gray-1: #f7f8fa;
+@gray-2: #f2f3f5;
+@gray-3: #ebedf0;
+@gray-4: #dcdee0;
+@gray-5: #c8c9cc;
+@gray-6: #969799;
+@gray-7: #646566;
+@gray-8: #323233;
+@red: #ee0a24;
+@blue: #1989fa;
+@orange: #ff976a;
+@orange-dark: #ed6a0c;
+@orange-light: #fffbe8;
+@green: #07c160;
+
+// Component Colors
+@text-color: @gray-8;
+@active-color: @gray-2;
+@active-opacity: 0.7;
+@disabled-opacity: 0.5;
+@background-color: @gray-1;
+@background-color-light: #fafafa;
 
 
-@button-primary-color: black;
-@button-primary-background-color: yellow;
-@button-primary-border-color: yellow;
+// Font
+@font-size-xs: 10px;
+@font-size-sm: 12px;
+@font-size-md: 14px;
+@font-size-lg: 16px;
+@font-size-title:17px;
+@font-weight-bold: 500;
+@price-integer-font-family: Avenir-Heavy, PingFang SC, Helvetica Neue, Arial,
+sans-serif;
+
+@primary-color: #20A596;
+@disable-color :#AEAEAE ;
+
+
+//button
+@button-primary-color: @white;
+@button-primary-background-color: @primary-color;
+@button-primary-border-color: @primary-color;
+@button-large-height: 45px;
+@button-large-line-height: 43px;
+
+
+.van-button--disabled {
+  background: @disable-color;
+  border-color: @disable-color;
+}
+
+.van-button--large{
+  width: calc(100% - 76px);
+  padding:  0  38px;
+  border-radius: 23px;
+}
+.van-button {
+  font-size: @font-size-md;
+}
+
+.van-nav-bar {
+  padding-top: 24px;
+}
+
+
+
+//NavBar
+@nav-bar-background-color: @primary-color;
+@nav-bar-icon-color: @white;
+@nav-bar-text-color: @white;
+@nav-bar-title-text-color: @white;
+@nav-bar-title-font-size: @font-size-title;
+
+
+.van-nav-bar__text:active{
+  background: @primary-color;
+}
