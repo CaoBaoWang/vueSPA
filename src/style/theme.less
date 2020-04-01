@@ -4,11 +4,11 @@
 @gray-1: #f7f8fa;
 @gray-2: #f2f3f5;
 @gray-3: #ebedf0;
-@gray-4: #dcdee0;
-@gray-5: #c8c9cc;
+@gray-4: #E5E5E5;//my
+@gray-5: #AEAEAE;//my
 @gray-6: #969799;
 @gray-7: #646566;
-@gray-8: #323233;
+@gray-8: #333333;
 @red: #ee0a24;
 @blue: #1989fa;
 @orange: #ff976a;
@@ -77,4 +77,21 @@ sans-serif;
 
 .van-nav-bar__text:active{
   background: @primary-color;
+}
+
+
+//Field 输入框
+@field-input-text-color: @text-color;
+@field-placeholder-text-color: @gray-5;
+.van-field{
+  padding: 17px 24px;
+  //margin: 0 24px;
+  //border-bottom: 1px solid @gray-4;
+}
+
+.van-field:not(:last-child)::after {
+
+  border-bottom: 1px solid @gray-4;
+  left: 24px;
+  right: 24px;
 }

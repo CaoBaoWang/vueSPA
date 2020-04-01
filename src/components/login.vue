@@ -1,30 +1,29 @@
 <template>
     <div>
-        <van-nav-bar
-                title="标题"
-                left-text="返回"
-                right-text="按钮"
-                left-arrow
-                @click-left="onClickLeft"
-                @click-right="onClickRight"
-        >
-<!--            <template #right>-->
-<!--                <van-icon name="search" size="22px"/>-->
-<!--            </template>-->
+        <van-nav-bar>
         </van-nav-bar>
-        login
+        <van-cell-group>
+            <van-field v-model="tel" placeholder="输入11位手机号码"/>
+            <van-field v-model="password" placeholder="输入登录密码"/>
+
+<!--         最后一van-field 没下划线  解决下划线问题   -->
+            <van-field  style="display: none"/>
+        </van-cell-group>
+
+
+
         <button @click="toHome">toHome</button>
         <button @click="show=!show">toggle</button>
 
         <p>loginName = {{user.loginName}}</p>
 
         <van-button disabled type="default">默认按钮</van-button>
-        <van-button :disabled="show"  type="primary">主要按钮</van-button>
+        <van-button :disabled="show" type="primary">主要按钮</van-button>
         <van-button type="info">信息按钮</van-button>
         <van-button type="warning">警告按钮</van-button>
         <van-button type="danger">危险按钮</van-button>
         <van-button type="primary" size="large">大号按钮</van-button>
-        <van-button loading type="primary" loading-text="加载中..."  size="large">大号按钮</van-button>
+        <van-button loading type="primary" loading-text="加载中..." size="large">大号按钮</van-button>
 
 
     </div>
@@ -33,12 +32,18 @@
 
 <script>
     import Vue from 'vue';
-    import { Button } from 'vant';
-    import { NavBar } from 'vant';
-    import { Icon } from 'vant';
 
+    import {Button} from 'vant';
+    import {NavBar} from 'vant';
+    import {Icon} from 'vant';
+    import {Field} from 'vant';
+    import { Cell, CellGroup } from 'vant';
+
+    Vue.use(Cell);
+    Vue.use(CellGroup);
+
+    Vue.use(Field);
     Vue.use(Icon);
-
     Vue.use(NavBar);
     Vue.use(Button);
 
@@ -46,10 +51,13 @@
         name: "login",
         data: function () {
             return {
-                show: true
+                show: true,
+                tel: '',
+                password: ''
             }
         },
         methods: {
+
             toHome() {
                 console.log(this.$store.getters['account/isLogin']);
 
@@ -62,10 +70,9 @@
                     .then(response => {
                         console.log('login.vue=-' + JSON.stringify(response))
                     })
-                    .catch(response=>{
+                    .catch(response => {
                         console.log(response);
                     })
-
 
 
                 //
@@ -87,6 +94,14 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    @import "../style/theme";
 
+    .van-nav-bar {
+        background: @white;
+    }
+
+    [class*='van-hairline']::after{
+        border: none;
+    }
 </style>
