@@ -1,4 +1,4 @@
-import { get} from '../network';
+import axios, { get} from '../network';
 
 export default {
     namespaced: true,
@@ -68,6 +68,13 @@ export default {
                 get('/api/account/login', param)
                     .then((response) => {
                         store.commit('setUser', response.data);
+                        let d =response.data;
+                        var token = d.token;
+                        var uid = d.uid;
+                        var version = '1.0.2';
+                        axios.defaults.headers.common['token'] = token;
+                        axios.defaults.headers.common['token'] = uid;
+                        axios.defaults.headers.common['token'] = version;
                         resolve(response);
                     })
                     .catch(response => {

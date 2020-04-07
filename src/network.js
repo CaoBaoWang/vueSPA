@@ -1,5 +1,7 @@
 import Axios from 'axios'
 
+// import store from 'vuex/store'
+
 
 function baseUrl() {
 
@@ -56,11 +58,14 @@ var axios = Axios.create({
 console.log(axios.defaults.baseURL);
 
 
+
 //全局请求拦截
 axios.interceptors.request.use(
     (config) => {
         // 1、发起请求时
-        config.headers.token = 'login token';
+       // var token = store.getState().account.user.token;
+       //  config.headers.token = token;
+
 
         return config;
     },
@@ -109,6 +114,9 @@ axios.interceptors.response.use(
 
     },
     err => {
+
+        if (!err.response)
+            return ;
         switch (err.response.status) {
             case 400:
                 err.message = '请求错误'

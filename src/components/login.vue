@@ -3,8 +3,8 @@
         <van-nav-bar>
         </van-nav-bar>
         <van-cell-group>
-            <van-field v-model="tel" placeholder="输入11位手机号码"/>
-            <van-field v-model="password" placeholder="输入登录密码"/>
+            <van-field placeholder="输入11位手机号码" v-model="param.loginName"/>
+            <van-field  placeholder="输入登录密码" v-model="param.password"/>
 
 <!--         最后一van-field 没下划线  解决下划线问题   -->
             <van-field  style="display: none"/>
@@ -52,8 +52,12 @@
         data: function () {
             return {
                 show: true,
-                tel: '',
-                password: ''
+
+                param : {
+                    loginName: 'admin',
+                    password: 'a123456',
+                    pushClient: 'ANDROID'
+                },
             }
         },
         methods: {
@@ -61,12 +65,7 @@
             toHome() {
                 console.log(this.$store.getters['account/isLogin']);
 
-                var param = {
-                    loginName: 'admin',
-                    password: 'a123456',
-                    pushClient: 'ANDROID'
-                };
-                this.$store.dispatch('account/login', param)
+                this.$store.dispatch('account/login', this.param)
                     .then(response => {
                         console.log('login.vue=-' + JSON.stringify(response))
                     })
