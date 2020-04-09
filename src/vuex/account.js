@@ -4,56 +4,27 @@ export default {
     namespaced: true,
     state: {
         user: {
-            "loginName": "",
-            "name": "",
-            "password": "",
-            "salt": "",
-            "mobile": "",
-            "isValid": 0,
-            "orgId": "",
-            "orgCode": "",
-            "orgName": "",
-            "description": "",
-            "createTime": "",
-            "updateTime": "",
-            "keyWord": "",
-            "roles": [
-                {
-                    "id": "",
-                    "name": "",
-                    "isValid": 0,
-                    "description": "",
-                    "createTime": "",
-                    "updateTime": "",
-                    "keyWord": "",
-                    "department": "",
-                    "content": "",
-                    "value": ""
-                }
-            ],
-            "roleIds": "",
-            "roleNames": "",
-            "loginLog": {
-                "id": "",
-                "loginName": "",
-                "loginIP": "",
-                "beginTime": "",
-                "loginTime": "",
-                "endTime": "",
-                "keyWord": ""
-            },
-            "department": "",
-            "content": "",
-            "token": "",
-            "oldPassword": ""
+            accountId:'',
+            name:'',
+            mobile:'',
+            loginName:'',
+            roleId : '',
+            roleName:'',
+            token : '',
+
+
+
         }
     },
     getters: {
         getUser(state) {
             return state.user;
         },
+        getUid(){
+          this.getUser().accountId;
+        },
         isLogin(state) {
-            return state.user.loginName !== '';
+            return state.user.accountId !== '';
         }
     },
     mutations: {
@@ -71,7 +42,8 @@ export default {
                         let d =response.data;
                         var token = d.token;
                         var uid = d.uid;
-                        var version = '1.0.2';
+                        var version = '1.0.4';
+
                         axios.defaults.headers.common['token'] = token;
                         axios.defaults.headers.common['token'] = uid;
                         axios.defaults.headers.common['token'] = version;

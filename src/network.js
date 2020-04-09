@@ -2,48 +2,54 @@ import Axios from 'axios'
 
 // import store from 'vuex/store'
 
+import Vue from 'vue';
+import {Toast} from 'vant';
+
+Vue.use(Toast);
 
 function baseUrl() {
 
-    let production = 'http://39.96.243.236';
-    let test = 'http://47.93.113.4:8089';
+
     /**
      * 涉及html5 plus 原生调试时 用tag（必须构建后放到原生app中，也可能使用某个debug环境）
      * @type {number}
-     * 1. 测试环境
-     * 3.正式环境
+     * 0，开发环境
+     * 1，朝实测试环境
+     * 2, 华远达生产环境
+     * 3, 朝实生产环境
+     * 4. 辽宁生成环境
      */
+    let urlTag = 1;
 
-        // let urlTag = 1 ;
-        //
-        // switch (urlTag) {
-        //     case 1:
-        //         return test;
-        //     case 3:
-        //         return production ;
-        // }
+    switch (urlTag) {
+        case 0:
+            return "http://192.168.1.253:18080";
+        case 1:
+            return "http://47.93.124.141:8080";
+        case 2:
+            return "http://cdn.dev.smarthome-jjle.com";
+        case 3:
+            return "https://cs-iems.com.cn";//线上
+
+        case 4:
+            return "https://iems.smarthome-jjle.com";//辽宁项目试用线上
+
+    }
 
 
-    let isProduction = process.env.NODE_ENV === 'production';
-    if (isProduction)
-        return production;
-    else
-        return test;
+    //
+    // let production = 'http://39.96.243.236';
+    // let test = 'http://47.93.113.4:8089';
+    //
+    // let isProduction = process.env.NODE_ENV === 'production';
+    // if (isProduction)
+    //     return production;
+    // else
+    //     return test;
 
 
 }
 
-//Axios 全局配置
-// Axios.defaults = {
-//     baseURL: baseUrl(),
-//     headers: {
-//         'Content-Type': 'application/json;charset=UTF-8',
-//         'Accept': 'application/json',
-//     },
-//     timeout: 1000 * 60,
-//     withCredentials: false,
-//     responseType: 'json'
-// };
 var axios = Axios.create({
     baseURL: baseUrl(),
     headers: {
@@ -58,13 +64,12 @@ var axios = Axios.create({
 console.log(axios.defaults.baseURL);
 
 
-
 //全局请求拦截
 axios.interceptors.request.use(
     (config) => {
         // 1、发起请求时
-       // var token = store.getState().account.user.token;
-       //  config.headers.token = token;
+        // var token = store.getState().account.user.token;
+        //  config.headers.token = token;
 
 
         return config;
@@ -82,12 +87,12 @@ axios.interceptors.request.use(
         // 2.需要重定向到错误页面
         const errorInfo = error.response;
         console.log(errorInfo);
+
         if (errorInfo) {
             // error =errorInfo.data//页面那边catch的时候就能拿到详细的错误信息,看最下边的Promise.reject
             const errorStatus = errorInfo.status; // 404 403 500 ... 等
             console.log('errorStatus' + errorStatus)
         }
-
 
         return Promise.reject(error);
     }
@@ -104,11 +109,13 @@ axios.interceptors.response.use(
         }
         if (data.status === 200) {
             //TODO 处理成功回调
+
             return data;
 
         } else {
-            //TODO Toast msg
-            console.log(data.msg);
+            console.log(response);
+            Toast(response.data.msg);
+
             return Promise.reject(response.data)
         }
 
@@ -116,7 +123,7 @@ axios.interceptors.response.use(
     err => {
 
         if (!err.response)
-            return ;
+            return;
         switch (err.response.status) {
             case 400:
                 err.message = '请求错误'
@@ -163,9 +170,7 @@ axios.interceptors.response.use(
                 break
         }
 
-        //TODO 统一提示
-        console.error(err)
-
+        Toast(err.message);
         return Promise.reject(err)
     }
 )

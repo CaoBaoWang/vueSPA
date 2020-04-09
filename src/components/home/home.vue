@@ -1,12 +1,12 @@
 <template>
     <div>
-        homemain
+        <van-nav-bar title="用电概况"></van-nav-bar>
     </div>
 </template>
 
 <script>
     export default {
-        name: "homeMain"
+        name: "home"
     }
 </script>
 
