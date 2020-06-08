@@ -16,7 +16,8 @@ module.exports = {
           // 'goods-action-button-warning-color': 'blue',
           // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
           // hack: 'true; @import "C:\\Users\\Administrator\\WebstormProjects\\public\\src\\style\\theme.less";',
-          hack: 'true; @import "'+__dirname+'\\src\\style\\theme.less";',
+          hack: 'true; @import "'+__dirname+'/src/style/theme.less";',//mac
+          // hack: 'true; @import "'+__dirname+'\\src\\style\\theme.less";',//win
 
 
 
